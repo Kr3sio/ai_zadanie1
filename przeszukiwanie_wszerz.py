@@ -17,10 +17,10 @@ class PrzeszukiwanieWszerz(RozwiazywaczLabiryntu):
         max_rozmiar_kolejki = 1
 
         while kolejka:
-            print('Bierząca kolejka : ', kolejka)
+            # print('Bierząca kolejka : ', kolejka)
             # print(kolejka)
             biezacy = kolejka.popleft()
-            print('Zdejmujemy z kolejki : ', biezacy)
+            # print('Zdejmujemy z kolejki : ', biezacy)
 
             if biezacy == self.meta:
                 sciezka = self.odtworz_sciezke(skad_przyszedl, biezacy)

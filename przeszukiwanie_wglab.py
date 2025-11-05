@@ -16,10 +16,10 @@ class PrzeszukiwanieWglab(RozwiazywaczLabiryntu):
         max_rozmiar_stosu = 1
 
         while stos:
-            print('Bierzący stos : ', stos)
+            # print('Bierzący stos : ', stos)
             # print(stos)
             biezacy = stos.pop()
-            print('Zdejmujemy ze stosu : ', biezacy)
+            # print('Zdejmujemy ze stosu : ', biezacy)
 
             if biezacy == self.meta:
                 sciezka = self.odtworz_sciezke(skad_przyszedl, biezacy)
@@ -32,9 +32,10 @@ class PrzeszukiwanieWglab(RozwiazywaczLabiryntu):
                     skad_przyszedl[sasiad] = biezacy
                     stos.append(sasiad)
 
+
             # NOWA LOGIKA: Aktualizuj maksymalny rozmiar po dodaniu sąsiadów
             if len(stos) > max_rozmiar_stosu:
                 max_rozmiar_stosu = len(stos)
 
         # ZMODYFIKOWANY RETURN: Zwracamy też max rozmiar w przypadku porażki
-        return None, odwiedzone, max_rozmiar_stosu
+        return None, odwiedzone, max_rozmiar_stos
