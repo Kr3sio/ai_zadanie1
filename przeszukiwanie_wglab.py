@@ -1,3 +1,5 @@
+import os
+
 from rozwiazywacz_labiryntu import RozwiazywaczLabiryntu
 
 
@@ -12,18 +14,28 @@ class PrzeszukiwanieWglab(RozwiazywaczLabiryntu):
         skad_przyszedl = {}
         odwiedzone = {self.start}
 
-        # NOWA ZMIENNA: Śledzenie maksymalnej zajętości pamięci (stosu)
         max_rozmiar_stosu = 1
-
+        if os.path.exists('wglab'):
+            os.remove('wglab')
         while stos:
+            zawartosc = ''
+            zawartosc += f'Bierzący stos : {stos} '+ "\n"
+
+
+            biezacy = stos.pop()
+            zawartosc += f'Zdejmujemy ze stosu :  {biezacy}' +"\n"
+
+
+            with open('wglab' ,'a', encoding='utf-8') as a:
+                a.write(zawartosc)
+
             # print('Bierzący stos : ', stos)
             # print(stos)
-            biezacy = stos.pop()
+
             # print('Zdejmujemy ze stosu : ', biezacy)
 
             if biezacy == self.meta:
                 sciezka = self.odtworz_sciezke(skad_przyszedl, biezacy)
-                # ZMODYFIKOWANY RETURN: Zwracamy też max rozmiar
                 return sciezka, odwiedzone, max_rozmiar_stosu
 
             for sasiad in self.pobierz_sasiadow(biezacy[0], biezacy[1]):
@@ -33,9 +45,7 @@ class PrzeszukiwanieWglab(RozwiazywaczLabiryntu):
                     stos.append(sasiad)
 
 
-            # NOWA LOGIKA: Aktualizuj maksymalny rozmiar po dodaniu sąsiadów
             if len(stos) > max_rozmiar_stosu:
                 max_rozmiar_stosu = len(stos)
 
-        # ZMODYFIKOWANY RETURN: Zwracamy też max rozmiar w przypadku porażki
         return None, odwiedzone, max_rozmiar_stos
