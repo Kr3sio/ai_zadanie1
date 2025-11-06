@@ -4,10 +4,7 @@ from rozwiazywacz_labiryntu import RozwiazywaczLabiryntu
 
 
 class PrzeszukiwanieWszerz(RozwiazywaczLabiryntu):
-    """
-    Implementuje strategię przeszukiwania wszerz (Breadth First Search).
-    Używa kolejki (FIFO), aby znaleźć najkrótszą ścieżkę.
-    """
+    # Używa kolejki (FIFO), aby znaleźć rozwiązanie.
 
     def rozwiaz(self):
         kolejka = deque([self.start])

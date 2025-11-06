@@ -2,7 +2,7 @@ import csv
 
 
 def wczytaj_labirynt_z_csv(nazwa_pliku):
-    """Wczytuje labirynt z pliku CSV i zwraca jako listę list."""
+    # Wczytuje labirynt z pliku CSV
     labirynt_mapa = []
     try:
         with open(nazwa_pliku, mode='r', encoding='utf-8') as plik:
@@ -35,7 +35,7 @@ def zapisz_rozwiazanie_do_txt(nazwa_pliku, nazwa_algorytmu, sciezka, odwiedzone,
     zbior_sciezki = set(sciezka) if sciezka else set()
 
     try:
-        # Używamy trybu 'a' (append/dołącz)
+        # 'a' (append/dołącz)
         with open(nazwa_pliku, 'a', encoding='utf-8') as f:
 
             f.write(f"\n" + "=" * 80 + "\n")
@@ -45,7 +45,7 @@ def zapisz_rozwiazanie_do_txt(nazwa_pliku, nazwa_algorytmu, sciezka, odwiedzone,
             else:
                 f.write(f"SUKCES: Znaleziono ścieżkę o długości {len(sciezka)} kroków.\n\n")
 
-            # Zapisujemy macierz niezależnie od rozmiaru
+            # Zapisanie macierzy
             for r in range(wiersze):
                 elementy_rzedu = []
                 for c in range(kolumny):

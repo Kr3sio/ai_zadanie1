@@ -1,18 +1,6 @@
 import heapq
 from rozwiazywacz_labiryntu import RozwiazywaczLabiryntu
 
-
-"""algorytm A* (A-gwiazdka) to doskonały, wydajny sposób rozwiązywania tego typu problemów.
- W przeciwieństwie do BFS (który ślepo szuka we wszystkich kierunkach) i DFS (który idzie na ślepo w głąb),
-  A* jest algorytmem "poinformowanym".Używa heurystyki, aby inteligentnie zgadywać,
-   która ścieżka jest najbardziej obiecująca i bada ją w pierwszej kolejności.Jak to działa?
-   A* wybiera następny krok na podstawie wzoru: $f(n) = g(n) + h(n)$$g(n)$ = Rzeczywisty koszt dotarcia 
-   z punktu 'S' do bieżącego pola (czyli liczba kroków, którą już zrobiliśmy).$h(n)$ = Heurystyka, 
-   czyli szacowany koszt dotarcia z bieżącego pola do mety 'M'. Użyjemy odległości Manhattan 
-   (suma różnic w osi X i Y), ponieważ jest bardzo szybka i nigdy nie przeszacowuje kosztu.
-   $f(n)$ = Łączny (rzeczywisty + szacowany) koszt.
- A* zawsze wybiera pole o najniższym $f(n)$."""
-
 class PrzeszukiwanieAGwiazdka(RozwiazywaczLabiryntu):
     """
     Implementuje strategię przeszukiwania A* (A-gwiazdka).
@@ -20,7 +8,6 @@ class PrzeszukiwanieAGwiazdka(RozwiazywaczLabiryntu):
     """
 
     def _heurystyka_manhattan(self, pozycja):
-        """Oblicza heurystykę - odległość Manhattan do mety."""
         (r, c) = pozycja
         (meta_r, meta_c) = self.meta
         return abs(r - meta_r) + abs(c - meta_c)

@@ -4,10 +4,7 @@ from rozwiazywacz_labiryntu import RozwiazywaczLabiryntu
 
 
 class PrzeszukiwanieWglab(RozwiazywaczLabiryntu):
-    """
-    Implementuje strategię przeszukiwania w głąb (Depth First Search).
-    Używa stosu (LIFO). Znajduje *jakąkolwiek* ścieżkę.
-    """
+    # Używa stosu (LIFO). Znajduje *jakąkolwiek* ścieżkę.
 
     def rozwiaz(self):
         stos = [self.start]
