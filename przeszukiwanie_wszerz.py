@@ -23,9 +23,9 @@ class PrzeszukiwanieWszerz(RozwiazywaczLabiryntu):
             biezacy = kolejka.popleft()
             zawartosc += f'Zdejmujemy z kolejki :  {biezacy}' +"\n"
             # print('Zdejmujemy z kolejki : ', biezacy)
-
-            with open('wszerz' ,'a', encoding='utf-8') as w:
-                w.write(zawartosc)
+            if self.wiersze < 100 or self.kolumny < 100:
+                with open('wszerz' ,'a', encoding='utf-8') as w:
+                    w.write(zawartosc)
 
             if biezacy == self.meta:
                 sciezka = self.odtworz_sciezke(skad_przyszedl, biezacy)

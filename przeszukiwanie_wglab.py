@@ -22,9 +22,9 @@ class PrzeszukiwanieWglab(RozwiazywaczLabiryntu):
             biezacy = stos.pop()
             zawartosc += f'Zdejmujemy ze stosu :  {biezacy}' +"\n"
 
-
-            with open('wglab' ,'a', encoding='utf-8') as a:
-                a.write(zawartosc)
+            if self.wiersze < 100 or self.kolumny < 100:
+                with open('wglab' ,'a', encoding='utf-8') as a:
+                    a.write(zawartosc)
 
             # print('Bierzący stos : ', stos)
             # print(stos)
