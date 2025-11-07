@@ -45,4 +45,4 @@ class PrzeszukiwanieWglab(RozwiazywaczLabiryntu):
             if len(stos) > max_rozmiar_stosu:
                 max_rozmiar_stosu = len(stos)
 
-        return None, odwiedzone, max_rozmiar_stos
+        return None, odwiedzone, max_rozmiar_stosu

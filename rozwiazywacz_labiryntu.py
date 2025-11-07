@@ -48,10 +48,7 @@ class RozwiazywaczLabiryntu:
 
 
     def pokaz_wynik(self, sciezka, odwiedzone):
-        """
-        Drukuje na KONSOLI kolorowy wynik w formie macierzy liczbowej (0,1,2,3).
-        Pomija drukowanie macierzy, jeśli jest zbyt duża.
-        """
+
 
         if not sciezka:
             print(f"{Fore.RED}PORAŻKA: Nie znaleziono ścieżki.{Style.RESET_ALL}")
@@ -59,7 +56,7 @@ class RozwiazywaczLabiryntu:
             print(f"{Fore.GREEN}SUKCES: Znaleziono ścieżkę o długości {len(sciezka)} kroków.{Style.RESET_ALL}")
 
 
-        # Sprawdzenie rozmiaru, aby uniknąć drukowania ogromnych macierzy na KONSOLI
+        # Pomijanie wypisywania w konsoli jeśli za duży rozmiar
         if self.wiersze > 50 or self.kolumny > 50:
             print(
                 f"Macierz wyników jest za duża do wyświetlenia w konsoli ({self.wiersze}x{self.kolumny}). Pomijam drukowanie.")
@@ -82,7 +79,7 @@ class RozwiazywaczLabiryntu:
                     else:
                         element_numeryczny = 0
 
-                    # Dodajemy kolory na podstawie wartości numerycznej
+                    # Dodawanie kolorów na podstawie wartości numerycznej
                     if element_numeryczny == 3:
                         elementy_rzedu_kolorowe.append(f"{Fore.GREEN}{element_numeryczny}{Style.RESET_ALL}")
                     elif element_numeryczny == 1:
@@ -95,5 +92,5 @@ class RozwiazywaczLabiryntu:
                 print(" ".join(elementy_rzedu_kolorowe))
 
     def rozwiaz(self):
-        """Metoda abstrakcyjna - implementowana przez klasy potomne."""
+        #Metoda abstrakcyjna - implementowana przez klasy potomne
         raise NotImplementedError("Należy zaimplementować w podklasie.")
