@@ -15,17 +15,17 @@ class PrzeszukiwanieWszerz(RozwiazywaczLabiryntu):
         if os.path.exists('wszerz'):
             os.remove('wszerz')
         while kolejka:
-            zawartosc = ''
-            zawartosc += f'Bierząca kolejka : { kolejka} '+ "\n"
+            # zawartosc = ''
+            # zawartosc += f'Bierząca kolejka : { kolejka} '+ "\n"
 
             # print('Bierząca kolejka : ', kolejka)
             # print(kolejka)
             biezacy = kolejka.popleft()
-            zawartosc += f'Zdejmujemy z kolejki :  {biezacy}' +"\n"
+            # zawartosc += f'Zdejmujemy z kolejki :  {biezacy}' +"\n"
             # print('Zdejmujemy z kolejki : ', biezacy)
-            if self.wiersze < 100 or self.kolumny < 100:
-                with open('wszerz' ,'a', encoding='utf-8') as w:
-                    w.write(zawartosc)
+            # if self.wiersze < 100 or self.kolumny < 100:
+            #     with open('wszerz' ,'a', encoding='utf-8') as w:
+            #         w.write(zawartosc)
 
             if biezacy == self.meta:
                 sciezka = self.odtworz_sciezke(skad_przyszedl, biezacy)

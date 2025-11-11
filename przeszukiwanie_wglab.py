@@ -15,16 +15,16 @@ class PrzeszukiwanieWglab(RozwiazywaczLabiryntu):
         if os.path.exists('wglab'):
             os.remove('wglab')
         while stos:
-            zawartosc = ''
-            zawartosc += f'Bierzący stos : {stos} '+ "\n"
+            # zawartosc = ''
+            # zawartosc += f'Bierzący stos : {stos} '+ "\n"
 
 
             biezacy = stos.pop()
-            zawartosc += f'Zdejmujemy ze stosu :  {biezacy}' +"\n"
+            # zawartosc += f'Zdejmujemy ze stosu :  {biezacy}' +"\n"
 
-            if self.wiersze < 100 or self.kolumny < 100:
-                with open('wglab' ,'a', encoding='utf-8') as a:
-                    a.write(zawartosc)
+            # if self.wiersze < 100 or self.kolumny < 100:
+            #     with open('wglab' ,'a', encoding='utf-8') as a:
+            #         a.write(zawartosc)
 
             # print('Bierzący stos : ', stos)
             # print(stos)
