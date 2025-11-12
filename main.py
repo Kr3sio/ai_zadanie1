@@ -24,8 +24,8 @@ if __name__ == "__main__":
     sredniCzasAStar = 0
 
 
-    # nazwa_pliku_labiryntu = "macierz_10000x10000.csv"
-    nazwa_pliku_labiryntu = "5x5.csv"
+    nazwa_pliku_labiryntu = "macierz_10000x10000.csv"
+    # nazwa_pliku_labiryntu = "5x5.csv"
     nazwa_pliku_txt = "rozwiazanie.txt"
 
     # Usuwanie pliku z wynikami jeśli istniał
@@ -33,96 +33,100 @@ if __name__ == "__main__":
         os.remove(nazwa_pliku_txt)
         print(f"Usunięto stary plik wyników: {nazwa_pliku_txt}")
 
-    # --- Sekcja BFS ---
-    try:
-        print(f"\n************* Rozpoczynam przeszukiwanie wszerz (BFS) dla {nazwa_pliku_labiryntu} *****************")
-        rozwiazywacz_bfs = PrzeszukiwanieWszerz(nazwa_pliku_labiryntu)
 
-        start_bfs = perf_counter()
-        sciezka_bfs, odwiedzone_bfs, max_kolejka = rozwiazywacz_bfs.rozwiaz()
-        czas_bfs = perf_counter() - start_bfs
+    for i in range(5):
+        # --- Sekcja BFS ---
+        try:
+            print(f"\n************* Rozpoczynam przeszukiwanie wszerz (BFS) dla {nazwa_pliku_labiryntu} *****************")
+            rozwiazywacz_bfs = PrzeszukiwanieWszerz(nazwa_pliku_labiryntu)
 
-        rozwiazywacz_bfs.pokaz_wynik(sciezka_bfs, odwiedzone_bfs)
+            start_bfs = perf_counter()
+            sciezka_bfs, odwiedzone_bfs, max_kolejka = rozwiazywacz_bfs.rozwiaz()
+            czas_bfs = perf_counter() - start_bfs
 
-        # Zapisz do pliku
-        # zapisz_rozwiazanie_do_txt(
-        #     nazwa_pliku_txt, "BFS", sciezka_bfs, odwiedzone_bfs,
-        #     rozwiazywacz_bfs.labirynt, rozwiazywacz_bfs.wiersze, rozwiazywacz_bfs.kolumny
-        # )
+            rozwiazywacz_bfs.pokaz_wynik(sciezka_bfs, odwiedzone_bfs)
 
-        print("\n--- Statystyki BFS ---")
-        print(f"Czas wykonania: {czas_bfs:.6f} s")
-        print(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_bfs)}")
-        print(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_kolejka}")
+            # Zapisz do pliku
+            # zapisz_rozwiazanie_do_txt(
+            #     nazwa_pliku_txt, "BFS", sciezka_bfs, odwiedzone_bfs,
+            #     rozwiazywacz_bfs.labirynt, rozwiazywacz_bfs.wiersze, rozwiazywacz_bfs.kolumny
+            # )
 
-        plikBFS.write(f"Czas wykonania: {czas_bfs:.6f} s \n")
-        plikBFS.write(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_bfs)} \n")
-        plikBFS.write(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_kolejka} \n\n")
+            print("\n--- Statystyki BFS ---")
+            print(f"Czas wykonania: {czas_bfs:.6f} s")
+            print(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_bfs)}")
+            print(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_kolejka}")
 
-        plikBFS.write("Nowe przejście \n")
+            plikBFS.write(f"Czas wykonania: {czas_bfs:.6f} s \n")
+            plikBFS.write(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_bfs)} \n")
+            plikBFS.write(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_kolejka} \n\n")
 
-        sredniCzasDFS += czas_bfs
+            plikBFS.write("Nowe przejście \n")
 
-        if(liczczasy):
+            sredniCzasDFS += czas_bfs
 
-            if(czas_bfs < czasBFS or czasBFS == 0):
-                czasBFS = czas_bfs
+            if(liczczasy):
 
-            sredniCzasBFS = sredniCzasBFS/5
-            plikBFS.write(f"Średni czas wykonania BFS: {sredniCzasBFS} \n")
+                if(czas_bfs < czasBFS or czasBFS == 0):
+                    czasBFS = czas_bfs
 
-
-            plikBFS.write(f"Minimalny czas wykonania: {czasBFS:.6f} s \n")
-
-    except (ValueError, FileNotFoundError) as e:
-        print(f"Nie udało się uruchomić BFS: {e}")
-
-    print("\n" + "=" * 80 + "\n")  # Separator
-
-    # --- Sekcja DFS ---
-    try:
-        print(f"************* Rozpoczynam przeszukiwanie w głąb (DFS) dla {nazwa_pliku_labiryntu} *****************")
-        rozwiazywacz_dfs = PrzeszukiwanieWglab(nazwa_pliku_labiryntu)
-
-        start_dfs = perf_counter()
-        sciezka_dfs, odwiedzone_dfs, max_stos = rozwiazywacz_dfs.rozwiaz()
-        czas_dfs = perf_counter() - start_dfs
-
-        rozwiazywacz_dfs.pokaz_wynik(sciezka_dfs, odwiedzone_dfs)
-
-        # Zapisz do pliku
-        # zapisz_rozwiazanie_do_txt(
-        #     nazwa_pliku_txt, "DFS", sciezka_dfs, odwiedzone_dfs,
-        #     rozwiazywacz_dfs.labirynt, rozwiazywacz_dfs.wiersze, rozwiazywacz_dfs.kolumny
-        # )
-
-        print("\n--- Statystyki DFS ---")
-        print(f"Czas wykonania: {czas_dfs:.6f} s")
-        print(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_dfs)}")
-        print(f"Maksymalna zajętość pamięci (węzły na stosie): {max_stos}")
-
-        plikDFS.write(f"Czas wykonania: {czas_dfs:.6f} s \n")
-        plikDFS.write(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_dfs)} \n")
-        plikDFS.write(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_stos} \n\n")
-
-        plikDFS.write("Nowe przejście \n")
-
-        if (liczczasy):
-            sredniCzasDFS += czas_dfs
-
-            if (czas_dfs < czasDFS or czasDFS == 0):
-                czasDFS = czas_dfs
-
-            sredniCzasDFS = sredniCzasDFS / 5
-            plikDFS.write(f"Średni czas wykonania BFS: {sredniCzasDFS} \n")
-
-            plikDFS.write(f"Minimalny czas wykonania: {czasDFS:.6f} s \n")
+                sredniCzasBFS = sredniCzasBFS/5
+                plikBFS.write(f"Średni czas wykonania BFS: {sredniCzasBFS} \n")
 
 
-    except (ValueError, FileNotFoundError) as e:
-        print(f"Nie udało się uruchomić DFS: {e}")
+                plikBFS.write(f"Minimalny czas wykonania: {czasBFS:.6f} s \n")
 
-    print("\n" + "=" * 80 + "\n")  # Separator
+        except (ValueError, FileNotFoundError) as e:
+            print(f"Nie udało się uruchomić BFS: {e}")
+
+        print("\n" + "=" * 80 + "\n")  # Separator
+
+
+    for i in range(5):
+        # --- Sekcja DFS ---
+        try:
+            print(f"************* Rozpoczynam przeszukiwanie w głąb (DFS) dla {nazwa_pliku_labiryntu} *****************")
+            rozwiazywacz_dfs = PrzeszukiwanieWglab(nazwa_pliku_labiryntu)
+
+            start_dfs = perf_counter()
+            sciezka_dfs, odwiedzone_dfs, max_stos = rozwiazywacz_dfs.rozwiaz()
+            czas_dfs = perf_counter() - start_dfs
+
+            rozwiazywacz_dfs.pokaz_wynik(sciezka_dfs, odwiedzone_dfs)
+
+            # Zapisz do pliku
+            # zapisz_rozwiazanie_do_txt(
+            #     nazwa_pliku_txt, "DFS", sciezka_dfs, odwiedzone_dfs,
+            #     rozwiazywacz_dfs.labirynt, rozwiazywacz_dfs.wiersze, rozwiazywacz_dfs.kolumny
+            # )
+
+            print("\n--- Statystyki DFS ---")
+            print(f"Czas wykonania: {czas_dfs:.6f} s")
+            print(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_dfs)}")
+            print(f"Maksymalna zajętość pamięci (węzły na stosie): {max_stos}")
+
+            plikDFS.write(f"Czas wykonania: {czas_dfs:.6f} s \n")
+            plikDFS.write(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_dfs)} \n")
+            plikDFS.write(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_stos} \n\n")
+
+            plikDFS.write("Nowe przejście \n")
+
+            if (liczczasy):
+                sredniCzasDFS += czas_dfs
+
+                if (czas_dfs < czasDFS or czasDFS == 0):
+                    czasDFS = czas_dfs
+
+                sredniCzasDFS = sredniCzasDFS / 5
+                plikDFS.write(f"Średni czas wykonania BFS: {sredniCzasDFS} \n")
+
+                plikDFS.write(f"Minimalny czas wykonania: {czasDFS:.6f} s \n")
+
+
+        except (ValueError, FileNotFoundError) as e:
+            print(f"Nie udało się uruchomić DFS: {e}")
+
+        print("\n" + "=" * 80 + "\n")  # Separator
 
     # --- Sekcja A* ---
     try:
