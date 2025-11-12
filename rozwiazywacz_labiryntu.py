@@ -57,7 +57,7 @@ class RozwiazywaczLabiryntu:
 
 
         # Pomijanie wypisywania w konsoli jeśli za duży rozmiar
-        if self.wiersze > 50 or self.kolumny > 50:
+        if self.wiersze > 1 or self.kolumny > 1:
             print(
                 f"Macierz wyników jest za duża do wyświetlenia w konsoli ({self.wiersze}x{self.kolumny}). Pomijam drukowanie.")
         else:

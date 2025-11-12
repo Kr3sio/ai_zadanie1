@@ -13,6 +13,7 @@ colorama.init()
 if __name__ == "__main__":
 
     nazwa_pliku_labiryntu = "macierz_10000x10000.csv"
+    # nazwa_pliku_labiryntu = "5x5.csv"
     nazwa_pliku_txt = "rozwiazanie.txt"
 
     # Usuwanie pliku z wynikami jeśli istniał
@@ -29,13 +30,13 @@ if __name__ == "__main__":
         sciezka_bfs, odwiedzone_bfs, max_kolejka = rozwiazywacz_bfs.rozwiaz()
         czas_bfs = perf_counter() - start_bfs
 
-        # rozwiazywacz_bfs.pokaz_wynik(sciezka_bfs, odwiedzone_bfs)
+        rozwiazywacz_bfs.pokaz_wynik(sciezka_bfs, odwiedzone_bfs)
 
         # Zapisz do pliku
-        zapisz_rozwiazanie_do_txt(
-            nazwa_pliku_txt, "BFS", sciezka_bfs, odwiedzone_bfs,
-            rozwiazywacz_bfs.labirynt, rozwiazywacz_bfs.wiersze, rozwiazywacz_bfs.kolumny
-        )
+        # zapisz_rozwiazanie_do_txt(
+        #     nazwa_pliku_txt, "BFS", sciezka_bfs, odwiedzone_bfs,
+        #     rozwiazywacz_bfs.labirynt, rozwiazywacz_bfs.wiersze, rozwiazywacz_bfs.kolumny
+        # )
 
         print("\n--- Statystyki BFS ---")
         print(f"Czas wykonania: {czas_bfs:.6f} s")
@@ -56,13 +57,13 @@ if __name__ == "__main__":
         sciezka_dfs, odwiedzone_dfs, max_stos = rozwiazywacz_dfs.rozwiaz()
         czas_dfs = perf_counter() - start_dfs
 
-        # rozwiazywacz_dfs.pokaz_wynik(sciezka_dfs, odwiedzone_dfs)
+        rozwiazywacz_dfs.pokaz_wynik(sciezka_dfs, odwiedzone_dfs)
 
         # Zapisz do pliku
-        zapisz_rozwiazanie_do_txt(
-            nazwa_pliku_txt, "DFS", sciezka_dfs, odwiedzone_dfs,
-            rozwiazywacz_dfs.labirynt, rozwiazywacz_dfs.wiersze, rozwiazywacz_dfs.kolumny
-        )
+        # zapisz_rozwiazanie_do_txt(
+        #     nazwa_pliku_txt, "DFS", sciezka_dfs, odwiedzone_dfs,
+        #     rozwiazywacz_dfs.labirynt, rozwiazywacz_dfs.wiersze, rozwiazywacz_dfs.kolumny
+        # )
 
         print("\n--- Statystyki DFS ---")
         print(f"Czas wykonania: {czas_dfs:.6f} s")
@@ -83,13 +84,13 @@ if __name__ == "__main__":
         sciezka_a, odwiedzone_a, max_front = rozwiazywacz_a_gwiazdka.rozwiaz()
         czas_a_gwiazdka = perf_counter() - start_a_gwiazdka
 
-        # rozwiazywacz_a_gwiazdka.pokaz_wynik(sciezka_a, odwiedzone_a)
-        #
+        rozwiazywacz_a_gwiazdka.pokaz_wynik(sciezka_a, odwiedzone_a)
+
         # Zapisz do pliku
-        zapisz_rozwiazanie_do_txt(
-            nazwa_pliku_txt, "A* (A-gwiazdka)", sciezka_a, odwiedzone_a,
-            rozwiazywacz_a_gwiazdka.labirynt, rozwiazywacz_a_gwiazdka.wiersze, rozwiazywacz_a_gwiazdka.kolumny
-        )
+        # zapisz_rozwiazanie_do_txt(
+        #     nazwa_pliku_txt, "A* (A-gwiazdka)", sciezka_a, odwiedzone_a,
+        #     rozwiazywacz_a_gwiazdka.labirynt, rozwiazywacz_a_gwiazdka.wiersze, rozwiazywacz_a_gwiazdka.kolumny
+        # )
 
         print("\n--- Statystyki A* ---")
         print(f"Czas wykonania: {czas_a_gwiazdka:.6f} s")

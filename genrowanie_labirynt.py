@@ -2,7 +2,7 @@ import csv
 from tqdm import tqdm  # pip install tqdm
 
 # Rozmiar macierzy
-N = 10_000
+N = 10000
 
 # Nazwa pliku wyjściowego
 filename = "macierz_10000x10000.csv"
