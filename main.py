@@ -5,15 +5,27 @@ from przeszukiwanie_a_gwiazdka import PrzeszukiwanieAGwiazdka
 from time import perf_counter
 import os
 
-from narzedzia import zapisz_rozwiazanie_do_txt
-
-
 colorama.init()
 
 if __name__ == "__main__":
 
-    nazwa_pliku_labiryntu = "macierz_10000x10000.csv"
-    # nazwa_pliku_labiryntu = "5x5.csv"
+    liczczasy = False
+
+    plikBFS = open("plikBFS.txt", "a", encoding='utf-8')
+    plikDFS = open("plikDFS.txt", "a", encoding='utf-8')
+    plikAStar = open("plikAStar.txt", "a", encoding='utf-8')
+
+    czasBFS = 0
+    czasDFS = 0
+    czasAStar = 0
+
+    sredniCzasBFS = 0
+    sredniCzasDFS = 0
+    sredniCzasAStar = 0
+
+
+    # nazwa_pliku_labiryntu = "macierz_10000x10000.csv"
+    nazwa_pliku_labiryntu = "5x5.csv"
     nazwa_pliku_txt = "rozwiazanie.txt"
 
     # Usuwanie pliku z wynikami jeśli istniał
@@ -43,6 +55,25 @@ if __name__ == "__main__":
         print(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_bfs)}")
         print(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_kolejka}")
 
+        plikBFS.write(f"Czas wykonania: {czas_bfs:.6f} s \n")
+        plikBFS.write(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_bfs)} \n")
+        plikBFS.write(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_kolejka} \n\n")
+
+        plikBFS.write("Nowe przejście \n")
+
+        sredniCzasDFS += czas_bfs
+
+        if(liczczasy):
+
+            if(czas_bfs < czasBFS or czasBFS == 0):
+                czasBFS = czas_bfs
+
+            sredniCzasBFS = sredniCzasBFS/5
+            plikBFS.write(f"Średni czas wykonania BFS: {sredniCzasBFS} \n")
+
+
+            plikBFS.write(f"Minimalny czas wykonania: {czasBFS:.6f} s \n")
+
     except (ValueError, FileNotFoundError) as e:
         print(f"Nie udało się uruchomić BFS: {e}")
 
@@ -70,6 +101,24 @@ if __name__ == "__main__":
         print(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_dfs)}")
         print(f"Maksymalna zajętość pamięci (węzły na stosie): {max_stos}")
 
+        plikDFS.write(f"Czas wykonania: {czas_dfs:.6f} s \n")
+        plikDFS.write(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_dfs)} \n")
+        plikDFS.write(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_stos} \n\n")
+
+        plikDFS.write("Nowe przejście \n")
+
+        if (liczczasy):
+            sredniCzasDFS += czas_dfs
+
+            if (czas_dfs < czasDFS or czasDFS == 0):
+                czasDFS = czas_dfs
+
+            sredniCzasDFS = sredniCzasDFS / 5
+            plikDFS.write(f"Średni czas wykonania BFS: {sredniCzasDFS} \n")
+
+            plikDFS.write(f"Minimalny czas wykonania: {czasDFS:.6f} s \n")
+
+
     except (ValueError, FileNotFoundError) as e:
         print(f"Nie udało się uruchomić DFS: {e}")
 
@@ -96,6 +145,25 @@ if __name__ == "__main__":
         print(f"Czas wykonania: {czas_a_gwiazdka:.6f} s")
         print(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_a)}")
         print(f"Maksymalna zajętość pamięci (węzły w kolejce priorytetowej): {max_front}")
+
+        plikAStar.write(f"Czas wykonania: {czas_a_gwiazdka:.6f} s \n")
+        plikAStar.write(f"Liczba przeszukanych pól (odwiedzone + ścieżka): {len(odwiedzone_a)} \n")
+        plikAStar.write(f"Maksymalna zajętość pamięci (węzły w kolejce): {max_front} \n\n")
+
+        plikAStar.write("Nowe przejście \n")
+
+        if (liczczasy):
+            sredniCzasAStar += czas_a_gwiazdka
+
+            if (czas_a_gwiazdka < czasAStar or czasAStar == 0):
+                czasAStar = czas_a_gwiazdka
+
+            sredniCzasAStar = sredniCzasAStar / 5
+            plikAStar.write(f"Średni czas wykonania BFS: {sredniCzasAStar} \n")
+
+            plikAStar.write(f"Minimalny czas wykonania: {czasAStar:.6f} s \n")
+
+
 
     except (ValueError, FileNotFoundError) as e:
         print(f"Nie udało się uruchomić A*: {e}")
